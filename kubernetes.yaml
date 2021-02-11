@@ -33,11 +33,11 @@ kind: Service
 metadata:
   name: sigo-api-logistica
 spec:
+  type: LoadBalancer 
+  ports:
+    - name: sigo-logistica
+      protocol: TCP
+      port: 8003
   selector:
     app: sigo-api-logistica
-  ports:
-    - protocol: TCP
-      port: 8003
-      targetPort: 8003
-      name: tcp-8003
 ---

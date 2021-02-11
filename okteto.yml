@@ -1,12 +1,3 @@
 name: sigo-api-logistica
-image: docker.io/brunoferreirag/sigo-api-logistica:latest
-sync:
-- .:/workspace/app/
-persistentVolume:
-  enabled: false
-forward:
-- 8003:8003
-resources:
-  limits:
-    cpu: "0.2"
-    memory: 0.25Gi
+deploy:
+  - kubectl apply -f kubernetes.yaml
