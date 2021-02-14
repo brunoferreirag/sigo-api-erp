@@ -33,7 +33,6 @@ kind: Service
 metadata:
   name: sigo-api-logistica
 spec:
-  type: LoadBalancer 
   ports:
     - name: sigo-logistica
       protocol: TCP
