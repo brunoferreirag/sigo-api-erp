@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.requestreply.KafkaReplyTimeoutException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +27,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import br.com.indtextbr.services.sigoapilogistica.common.ErroDTO;
 import br.com.indtextbr.services.sigoapilogistica.model.Armazem;
 import br.com.indtextbr.services.sigoapilogistica.service.ArmazemService;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("armazens")
+@Log4j2
 public class ArmazemController {
 	private ArmazemService armazemService;
 	
@@ -52,12 +55,18 @@ public class ArmazemController {
 	
 	@PostMapping(produces = { "application/json" })
 	public ResponseEntity<Object> incluirAmazem(@RequestBody @Valid Armazem armazem) throws JsonProcessingException, InterruptedException, ExecutionException{
-		var armazemExistente = this.armazemService.getArmazemById(armazem.getId());
-		
-		if(armazemExistente!=null) {
-			ErroDTO erro = new ErroDTO("Armazém já cadastrado");
-			return ResponseEntity.badRequest().body(erro);
+		try {
+			var armazemExistente = this.armazemService.getArmazemById(armazem.getId());
+			
+			if(armazemExistente!=null) {
+				ErroDTO erro = new ErroDTO("Armazém já cadastrado");
+				return ResponseEntity.badRequest().body(erro);
+			}
 		}
+		catch(KafkaReplyTimeoutException ex) {
+			log.error(ex);
+		}
+		
 		
 		this.armazemService.incluirArmazem(armazem);
 		return ResponseEntity.accepted().build();
