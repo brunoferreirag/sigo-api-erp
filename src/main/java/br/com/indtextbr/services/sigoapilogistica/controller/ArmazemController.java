@@ -54,20 +54,7 @@ public class ArmazemController {
 	}
 	
 	@PostMapping(produces = { "application/json" })
-	public ResponseEntity<Object> incluirAmazem(@RequestBody @Valid Armazem armazem) throws JsonProcessingException, InterruptedException, ExecutionException{
-		try {
-			var armazemExistente = this.armazemService.getArmazemById(armazem.getId());
-			
-			if(armazemExistente!=null) {
-				ErroDTO erro = new ErroDTO("Armazém já cadastrado");
-				return ResponseEntity.badRequest().body(erro);
-			}
-		}
-		catch(KafkaReplyTimeoutException ex) {
-			log.error(ex);
-		}
-		
-		
+	public ResponseEntity<Object> incluirAmazem(@RequestBody @Valid Armazem armazem) throws JsonProcessingException, InterruptedException, ExecutionException{	
 		this.armazemService.incluirArmazem(armazem);
 		return ResponseEntity.accepted().build();
 	}
