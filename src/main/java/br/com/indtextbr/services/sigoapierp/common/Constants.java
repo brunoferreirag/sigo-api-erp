@@ -1,4 +1,4 @@
-package br.com.indtextbr.services.sigoapilogistica.common;
+package br.com.indtextbr.services.sigoapierp.common;
 
 
 public final class Constants {

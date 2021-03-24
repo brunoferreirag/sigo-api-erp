@@ -1,4 +1,4 @@
-package br.com.indtextbr.services.sigoapilogistica.common;
+package br.com.indtextbr.services.sigoapierp.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

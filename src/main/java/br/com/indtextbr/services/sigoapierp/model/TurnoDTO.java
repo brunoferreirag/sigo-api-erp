@@ -1,4 +1,5 @@
-package br.com.indtextbr.services.sigoapilogistica.model;
+package br.com.indtextbr.services.sigoapierp.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetArmazensRequestDTO {
-	private int size;
-	private int page;
-	private String codigoArmazem;
+public class TurnoDTO {
+	private Long id;	
 }
