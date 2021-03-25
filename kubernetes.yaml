@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sigo-api-logistica
+  name: sigo-api-erp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sigo-api-logistica
+      app: sigo-api-erp
   template:
     metadata:
       labels:
-        app: sigo-api-logistica
+        app: sigo-api-erp
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: sigo-api-logistica
-        image: docker.io/brunoferreirag/sigo-api-logistica:latest
+      - name: sigo-api-erp
+        image: docker.io/brunoferreirag/sigo-api-erp:latest
         ports:
         - containerPort: 8003
-          name: sigo-logistica
+          name: sigo-erp
         resources:
           requests:
             memory: "256Mi"
@@ -31,12 +31,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sigo-api-logistica
+  name: sigo-api-erp
 spec:
   ports:
-    - name: sigo-logistica
+    - name: sigo-erp
       protocol: TCP
       port: 8003
   selector:
-    app: sigo-api-logistica
+    app: sigo-api-erp
 ---
