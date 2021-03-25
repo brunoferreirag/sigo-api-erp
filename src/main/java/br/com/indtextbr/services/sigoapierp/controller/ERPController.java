@@ -31,7 +31,7 @@ import br.com.indtextbr.services.sigoapierp.util.RestPage;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("erp")
+@RequestMapping()
 public class ERPController {
 	private ERPClient erpClient;
 
