@@ -77,7 +77,7 @@ public class ERPController {
 	public ResponseEntity<Void> atualizarParada(@PathVariable(value = "id") Long id,
 			@RequestBody @Valid ParadaProducaoDTO paradaProducao) {
 		this.erpClient.atualizarParada(id, paradaProducao);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping(value = "/parada-producao/{id}", produces = { "application/json" })
