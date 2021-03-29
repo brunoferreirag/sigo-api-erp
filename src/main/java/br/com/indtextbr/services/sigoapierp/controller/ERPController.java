@@ -83,7 +83,7 @@ public class ERPController {
 	@DeleteMapping(value = "/parada-producao/{id}", produces = { "application/json" })
 	public ResponseEntity<Void> excluirParada(@PathVariable(value = "id") Long id) {
 		this.erpClient.excluirParada(id);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 	
 }
